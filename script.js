@@ -265,42 +265,130 @@ startCountdown();
 
 
 /* =========================================
-MUSIC PLAYER
+KOTAK HADIAH -> KOTAK MUSIK
 ========================================= */
 
-const audioPlayer = document.getElementById("audioPlayer");
-const musicPlayBtn = document.getElementById("musicPlayBtn");
-const musicIcon = document.getElementById("musicIcon");
+const giftBox = document.getElementById("giftBox");
+const giftSparkles = document.getElementById("giftSparkles");
+const musicBox = document.getElementById("musicBox");
+const musicBoxCore = document.getElementById("musicBoxCore");
+const musicBoxHint = document.getElementById("musicBoxHint");
+const musicBoxAudio = document.getElementById("musicBoxAudio");
+const musicBoxPhotos = document.getElementById("musicBoxPhotos");
 
-if (audioPlayer && musicPlayBtn) {
+let slideshowInterval = null;
+let slideshowIndex = 0;
 
-    musicPlayBtn.addEventListener("click", () => {
+// --- STAGE 1: buka kotak hadiah ---
+if (giftBox) {
 
-        if (audioPlayer.paused) {
+    giftBox.addEventListener("click", () => {
 
-            audioPlayer.play()
-                .then(() => {
-                    musicPlayBtn.textContent = "❚❚";
-                    musicIcon.classList.add("spinning");
-                })
-                .catch((err) => {
-                    console.error(err);
-                    alert("Belum ada file musik di assets/song.mp3. Tambahkan file lagunya dulu ya.");
-                });
+        if (giftBox.classList.contains("opening")) return;
 
+        giftBox.classList.add("opening");
+        spawnSparkles(giftSparkles);
+
+        setTimeout(() => {
+            giftBox.classList.add("hidden");
+            musicBox.classList.add("revealed");
+        }, 700);
+
+    });
+
+}
+
+function spawnSparkles(container) {
+
+    container.innerHTML = "";
+
+    for (let i = 0; i < 18; i++) {
+
+        const piece = document.createElement("div");
+        piece.className = "sparkle-piece";
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 60 + Math.random() * 80;
+
+        piece.style.setProperty("--tx", Math.cos(angle) * distance + "px");
+        piece.style.setProperty("--ty", Math.sin(angle) * distance + "px");
+        piece.style.animationDelay = (Math.random() * 0.2) + "s";
+        piece.style.background = Math.random() > 0.5 ? "var(--peach)" : "var(--rose)";
+
+        container.appendChild(piece);
+
+    }
+
+    setTimeout(() => { container.innerHTML = ""; }, 1000);
+
+}
+
+// --- STAGE 2: tekan kotak musik untuk memutar ---
+if (musicBoxCore) {
+
+    musicBoxCore.addEventListener("click", () => {
+
+        if (musicBox.classList.contains("playing")) {
+            pauseMusicBox();
         } else {
-
-            audioPlayer.pause();
-            musicPlayBtn.textContent = "▶";
-            musicIcon.classList.remove("spinning");
-
+            playMusicBox();
         }
 
     });
 
-    audioPlayer.addEventListener("ended", () => {
-        musicPlayBtn.textContent = "▶";
-        musicIcon.classList.remove("spinning");
-    });
+}
 
+function playMusicBox() {
+
+    musicBoxAudio.play()
+        .then(() => {
+            musicBox.classList.add("playing");
+            musicBoxHint.textContent = "Tekan lagi untuk jeda";
+            startPhotoSlideshow();
+        })
+        .catch((err) => {
+            console.error(err);
+            alert("Belum ada file musik di assets/musicbox-song.mp3. Tambahkan file lagunya dulu ya.");
+        });
+
+}
+
+function pauseMusicBox() {
+
+    musicBoxAudio.pause();
+    musicBox.classList.remove("playing");
+    musicBoxHint.textContent = "Tekan kotaknya untuk memutar musik";
+    stopPhotoSlideshow();
+
+}
+
+function startPhotoSlideshow() {
+
+    const photos = musicBoxPhotos.querySelectorAll("img");
+    if (photos.length === 0) return;
+
+    photos.forEach((img) => img.classList.remove("active"));
+    slideshowIndex = 0;
+    photos[0].classList.add("active");
+
+    stopPhotoSlideshow();
+
+    slideshowInterval = setInterval(() => {
+
+        const currentPhotos = musicBoxPhotos.querySelectorAll("img");
+        if (currentPhotos.length === 0) return;
+
+        currentPhotos[slideshowIndex].classList.remove("active");
+        slideshowIndex = (slideshowIndex + 1) % currentPhotos.length;
+        currentPhotos[slideshowIndex].classList.add("active");
+
+    }, 4000);
+
+}
+
+function stopPhotoSlideshow() {
+    if (slideshowInterval) {
+        clearInterval(slideshowInterval);
+        slideshowInterval = null;
+    }
 }
