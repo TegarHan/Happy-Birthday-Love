@@ -477,72 +477,215 @@ LETTER
 }
 
 /* =========================================
-MUSIC PLAYER
+GIFT BOX + MUSIC BOX
 ========================================= */
 
-.music-player {
+.giftbox-stage {
+  position: relative;
   margin-top: 28px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 16px;
-  box-shadow: 0 6px 20px rgba(232, 143, 179, 0.12);
-  text-align: left;
-}
-
-.music-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--peach), var(--rose));
+  min-height: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
 }
 
-.music-icon.spinning {
-  animation: spin 4s linear infinite;
-}
+/* --- STAGE 1: KOTAK HADIAH --- */
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.music-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.music-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-dark);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.music-artist {
-  font-size: 12px;
-  color: var(--text-light);
-}
-
-.music-play-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: var(--rose);
-  color: #fff;
-  font-size: 14px;
+.gift-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
-  flex-shrink: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gift-box.hidden {
+  display: none;
+}
+
+.gift-box-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sparkle-piece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--peach);
+  opacity: 0;
+  animation: sparkleBurst 0.8s ease-out forwards;
+}
+
+@keyframes sparkleBurst {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% {
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1);
+    opacity: 0;
+  }
+}
+
+.gift-box-emoji {
+  font-size: 90px;
+  filter: drop-shadow(0 10px 20px var(--glow));
+  animation: giftBounce 2s ease-in-out infinite;
+}
+
+@keyframes giftBounce {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+.gift-box.opening .gift-box-emoji {
+  animation: giftPop 0.7s ease forwards;
+}
+
+@keyframes giftPop {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  35% { transform: scale(1.3) rotate(-14deg); opacity: 1; }
+  70% { transform: scale(0.6) rotate(10deg); opacity: 1; }
+  100% { transform: scale(0.2) rotate(20deg); opacity: 0; }
+}
+
+.gift-box.opening .gift-box-hint {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gift-box-hint {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--text-mid);
+}
+
+/* --- STAGE 2: KOTAK MUSIK --- */
+
+.music-box {
+  position: absolute;
+  width: 100%;
+  max-width: 320px;
+  min-height: 300px;
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.music-box.revealed {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.music-box-photos {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.music-box-photos img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.music-box-photos img.active {
+  opacity: 1;
+}
+
+.music-box-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(255, 245, 248, 0.8), rgba(255, 245, 248, 0.94));
+  transition: opacity 0.8s ease;
+}
+
+.music-box.playing .music-box-overlay {
+  opacity: 0.32;
+}
+
+.music-box-core {
+  position: relative;
+  z-index: 2;
+  width: 110px;
+  height: 90px;
+  cursor: pointer;
+}
+
+.music-box-core::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 58px;
+  background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+  border-radius: 10px;
+  box-shadow: 0 10px 24px var(--glow);
+}
+
+.music-box-lid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 38px;
+  background: linear-gradient(135deg, var(--lavender), var(--rose));
+  border-radius: 10px 10px 4px 4px;
+  transform-origin: left center;
+  transition: transform 0.5s ease;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.music-box.playing .music-box-lid {
+  transform: rotateX(115deg) translateY(-4px);
+}
+
+.music-box-note {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  z-index: 3;
+  font-size: 24px;
+  color: var(--rose-deep);
+  transform: translateX(-50%) scale(0);
+  transition: transform 0.4s ease;
+}
+
+.music-box.playing .music-box-note {
+  transform: translateX(-50%) translateY(-32px) scale(1);
+  animation: noteFloat 2.4s ease-in-out infinite;
+}
+
+@keyframes noteFloat {
+  0%, 100% { transform: translateX(-50%) translateY(-32px) rotate(-6deg); }
+  50% { transform: translateX(-50%) translateY(-44px) rotate(6deg); }
+}
+
+.music-box-hint {
+  position: relative;
+  z-index: 2;
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--text-mid);
 }
 
 /* =========================================
