@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+
+```
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<meta name="theme-color" content="#080808">
+
+<title>Blow the Candle</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<main class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <p class="eyebrow">
+            MAKE A WISH
+        </p>
+
+        <h1>
+            Blow the Candle
+        </h1>
+
+        <p class="subtitle">
+            Tiup lilinnya melalui kamera.
+        </p>
+
+    </header>
+
+
+    <!-- CANDLE -->
+    <section class="candle-section">
+    <!-- CAMERA -->
+    <video
+        id="webcam"
+        autoplay
+        playsinline
+        muted
+    ></video>
+
+    <!-- OVERLAY CANDLE -->
+    <div class="candle-glow"></div>
+
+    <div class="flame" id="flame">
+        🔥
+    </div>
+
+    <div class="smoke" id="smoke"></div>
+
+    <div class="candle">
+        🕯️
+    </div>
+
+</section>
+
+
+
+    <!-- INSTRUCTION -->
+    <section class="instruction">
+
+        <p id="status">
+            Siap untuk membuat permintaan?
+        </p>
+
+    </section>
+
+
+    <!-- START BUTTON -->
+    <button
+        id="startButton"
+        class="start-button"
+        type="button"
+    >
+        Mulai
+    </button>
+
+</main>
+
+
+<!-- CELEBRATION OVERLAY -->
+<div class="celebration" id="celebration">
+
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <div class="celebration-content">
+
+        <p class="celebration-emoji">🎂🎉</p>
+
+        <h2>Happy Birthday!</h2>
+
+        <p>Semoga semua harapanmu terkabul ✨</p>
+
+        <button
+            id="restartButton"
+            class="restart-button"
+            type="button"
+        >
+            Tiup Lagi
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+```
+
+</body>
+</html>
