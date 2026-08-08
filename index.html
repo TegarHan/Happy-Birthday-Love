@@ -206,28 +206,57 @@
 
 
     <!-- ============================================= -->
-    <!-- MUSIK                                          -->
+    <!-- KOTAK HADIAH -> KOTAK MUSIK                    -->
     <!-- ============================================= -->
-    <section class="section music-section" id="music">
-        <p class="section-eyebrow">Lagu Untuknya</p>
-        <h2 class="section-title small">Putar Ini Saat Membaca</h2>
+    <section class="section giftbox-section" id="giftbox">
+        <p class="section-eyebrow">Sebuah Hadiah</p>
+        <h2 class="section-title small">Untukmu, Afi</h2>
+        <p class="section-desc">Ketuk kotaknya.</p>
 
-        <div class="music-player">
-            <div class="music-icon" id="musicIcon">🎵</div>
-            <div class="music-info">
-                <p class="music-title" id="musicTitle">Nama Lagu</p>
-                <p class="music-artist" id="musicArtist">Nama Artis</p>
+        <div class="giftbox-stage" id="giftboxStage">
+
+            <!-- STAGE 1: KOTAK HADIAH TERTUTUP -->
+            <div class="gift-box" id="giftBox">
+                <div class="gift-box-sparkles" id="giftSparkles"></div>
+                <div class="gift-box-emoji">🎁</div>
+                <p class="gift-box-hint">Ketuk untuk membuka</p>
             </div>
-            <button class="music-play-btn" id="musicPlayBtn" type="button" aria-label="Putar musik">▶</button>
+
+            <!-- STAGE 2: KOTAK MUSIK (muncul setelah kotak hadiah dibuka) -->
+            <div class="music-box" id="musicBox">
+
+                <!--
+                    CARA MENGISI FOTO KENANGAN:
+                    Taruh foto di folder /assets dengan nama memory1.jpg s.d memory6.jpg.
+                    Foto ini akan muncul bergantian di belakang kotak musik saat musik diputar.
+                -->
+                <div class="music-box-photos" id="musicBoxPhotos">
+                    <img src="assets/memory1.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/memory2.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/memory3.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/memory4.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/memory5.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/memory6.jpg" alt="" onerror="this.remove()">
+                </div>
+
+                <div class="music-box-overlay"></div>
+
+                <div class="music-box-core" id="musicBoxCore" role="button" aria-label="Putar musik box">
+                    <div class="music-box-lid" id="musicBoxLid"></div>
+                    <div class="music-box-note" id="musicBoxNote">♪</div>
+                </div>
+
+                <p class="music-box-hint" id="musicBoxHint">Tekan kotaknya untuk memutar musik</p>
+
+            </div>
+
         </div>
 
         <!--
             CARA MENGISI MUSIK:
-            1. Taruh file lagu (mp3) di folder /assets, misal assets/song.mp3
-            2. Ganti src di bawah ini sesuai nama filenya
-            3. Ganti #musicTitle dan #musicArtist di atas lewat isi teks di HTML ini
+            Taruh file lagu (mp3) di folder /assets dengan nama musicbox-song.mp3
         -->
-        <audio id="audioPlayer" src="assets/song.mp3" preload="none"></audio>
+        <audio id="musicBoxAudio" src="assets/musicbox-song.mp3" preload="none" loop></audio>
     </section>
 
 
