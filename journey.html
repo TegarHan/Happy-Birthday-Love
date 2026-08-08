@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+    <meta name="theme-color" content="#fff2f6">
+    <title>Perjalananku</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styling khusus halaman ini saja */
+        .journey-hero {
+            padding-top: 80px;
+            padding-bottom: 20px;
+        }
+        .journey-hero .section-eyebrow { color: var(--lavender); }
+        .journey-intro {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-mid);
+            margin-top: 16px;
+        }
+        .journey-story {
+            text-align: left;
+        }
+        .journey-story .timeline-dot {
+            background: var(--lavender);
+        }
+        .journey-story .timeline::before {
+            background: linear-gradient(to bottom, var(--lavender), var(--rose));
+        }
+        .journey-closing {
+            margin-top: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 28px 22px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(185, 164, 224, 0.18);
+        }
+        .journey-closing p {
+            font-size: 15.5px;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+        }
+        .journey-closing p:last-child { margin-bottom: 0; }
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            margin-bottom: 60px;
+            color: var(--text-light);
+            font-size: 14px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<main class="app">
+
+    <section class="section journey-hero">
+        <p class="section-eyebrow">Sebelum kamu lanjut membaca</p>
+        <h2 class="section-title">Perjalananku</h2>
+        <p class="journey-intro">
+            <!-- GANTI: kalimat pembuka, kenapa kamu ingin cerita ini dibaca olehnya -->
+            Ini bagian dari diriku yang belum pernah aku ceritakan
+            secara utuh padamu. Aku ingin kamu mengenalku lebih dalam,
+            lewat cerita ini.
+        </p>
+    </section>
+
+    <section class="section">
+        <div class="timeline journey-story">
+            <!-- GANTI setiap poin di bawah dengan cerita perjalanan hidupmu yang belum dia tahu -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">Titik Awal</span>
+                    <p>Ganti dengan bagian dari masa lalumu — dari mana kamu memulai, atau tantangan yang kamu hadapi sejak awal.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">Masa Sulit</span>
+                    <p>Ganti dengan momen berat yang kamu lewati sendirian, yang belum pernah kamu ceritakan padanya.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">Titik Balik</span>
+                    <p>Ganti dengan momen yang mengubah caramu memandang hidup, atau alasan kamu bertahan.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">Bertemu Denganmu</span>
+                    <p>Ganti dengan bagaimana dia hadir di tengah perjalananmu, dan apa artinya itu untukmu.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">Sekarang</span>
+                    <p>Ganti dengan bagaimana kamu melihat dirimu sekarang, dan harapanmu ke depan bersamanya.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="journey-closing">
+            <!-- GANTI: penutup personal untuk Afi setelah dia membaca ceritamu -->
+            <p>Afi,</p>
+            <p>
+                Terima kasih sudah membaca sampai sini. Ini bukan cerita
+                yang mudah aku bagikan, tapi aku ingin kamu tahu semuanya —
+                termasuk bagian-bagian yang belum pernah kuceritakan.
+            </p>
+            <p>
+                (Ganti paragraf ini dengan pesan penutup personalmu.)
+            </p>
+            <p class="letter-signature">— Ganti dengan namamu</p>
+        </div>
+
+        <a href="index.html" class="back-link">← Kembali ke halaman Afi</a>
+    </section>
+
+</main>
+
+</body>
+</html>
