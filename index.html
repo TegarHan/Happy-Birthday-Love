@@ -1,124 +1,263 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-
-```
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
-
-<meta name="theme-color" content="#080808">
-
-<title>Blow the Candle</title>
-
-<link rel="stylesheet" href="style.css">
-```
-
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+    <meta name="theme-color" content="#fff2f6">
+    <title>Untuk Afi 💌</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-```
 <main class="app">
 
-    <!-- HEADER -->
-    <header class="header">
+    <!-- ============================================= -->
+    <!-- HERO / TIUP LILIN                              -->
+    <!-- ============================================= -->
+    <section class="hero" id="hero">
 
-        <p class="eyebrow">
-            MAKE A WISH
-        </p>
+        <header class="header">
+            <p class="eyebrow">MAKE A WISH</p>
+            <h1>Blow the Candle</h1>
+            <p class="subtitle">Tiup lilinnya melalui kamera, Afi.</p>
+        </header>
 
-        <h1>
-            Blow the Candle
-        </h1>
+        <div class="candle-section">
+            <video id="webcam" autoplay playsinline muted></video>
+            <div class="candle-glow"></div>
+            <div class="flame" id="flame">🔥</div>
+            <div class="smoke" id="smoke"></div>
+            <div class="candle">🕯️</div>
+        </div>
 
-        <p class="subtitle">
-            Tiup lilinnya melalui kamera.
-        </p>
+        <section class="instruction">
+            <p id="status">Siap untuk membuat permintaan?</p>
+        </section>
 
-    </header>
-
-
-    <!-- CANDLE -->
-    <section class="candle-section">
-    <!-- CAMERA -->
-    <video
-        id="webcam"
-        autoplay
-        playsinline
-        muted
-    ></video>
-
-    <!-- OVERLAY CANDLE -->
-    <div class="candle-glow"></div>
-
-    <div class="flame" id="flame">
-        🔥
-    </div>
-
-    <div class="smoke" id="smoke"></div>
-
-    <div class="candle">
-        🕯️
-    </div>
-
-</section>
-
-
-
-    <!-- INSTRUCTION -->
-    <section class="instruction">
-
-        <p id="status">
-            Siap untuk membuat permintaan?
-        </p>
+        <button id="startButton" class="start-button" type="button">Mulai</button>
 
     </section>
 
 
-    <!-- START BUTTON -->
-    <button
-        id="startButton"
-        class="start-button"
-        type="button"
-    >
-        Mulai
-    </button>
+    <!-- ============================================= -->
+    <!-- INTRO — TENTANG DIA                            -->
+    <!-- ============================================= -->
+    <section class="section intro-section" id="intro">
+        <p class="section-eyebrow">Untuk seseorang yang istimewa</p>
+        <h2 class="section-title">Aulia Hayyu Fiidinilah</h2>
+        <p class="nickname">— Afi —</p>
+        <p class="intro-text">
+            <!-- GANTI: tulis 2-3 kalimat pembuka tentang dia, kesan pertama,
+                 atau kenapa hari ini spesial untuknya -->
+            Halaman ini dibuat khusus untuk merayakan hari lahirmu.
+            Setiap bagian di sini adalah potongan kecil dari betapa
+            berartinya kamu.
+        </p>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- COUNTDOWN                                      -->
+    <!-- ============================================= -->
+    <section class="section countdown-section" id="countdown">
+        <p class="section-eyebrow">Hitung Mundur</p>
+        <h2 class="section-title small">Menuju 17 Agustus</h2>
+
+        <div class="countdown-grid" id="countdownGrid">
+            <div class="countdown-box">
+                <span class="countdown-number" id="cdDays">--</span>
+                <span class="countdown-label">Hari</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="cdHours">--</span>
+                <span class="countdown-label">Jam</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="cdMinutes">--</span>
+                <span class="countdown-label">Menit</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="cdSeconds">--</span>
+                <span class="countdown-label">Detik</span>
+            </div>
+        </div>
+
+        <p class="countdown-note" id="countdownNote"></p>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- GALERI FOTO (placeholder, isi sendiri)         -->
+    <!-- ============================================= -->
+    <section class="section gallery-section" id="gallery">
+        <p class="section-eyebrow">Kenangan</p>
+        <h2 class="section-title small">Galeri Foto</h2>
+        <p class="section-desc">
+            <!-- GANTI: kalimat pengantar galeri -->
+            Beberapa momen yang aku simpan baik-baik.
+        </p>
+
+        <div class="gallery-grid" id="galleryGrid">
+            <!--
+                CARA MENGISI FOTO:
+                Ganti src="assets/photo1.jpg" dengan file fotomu di folder /assets.
+                Ganti isi alt="" dengan deskripsi singkat foto (opsional caption di bawahnya).
+                Tinggal duplikasi blok <figure> ini untuk menambah foto lagi.
+            -->
+            <figure class="gallery-item">
+                <img src="assets/photo1.jpg" alt="Ganti dengan fotomu" onerror="this.parentElement.classList.add('gallery-empty')">
+                <figcaption>Ganti caption 1</figcaption>
+            </figure>
+            <figure class="gallery-item">
+                <img src="assets/photo2.jpg" alt="Ganti dengan fotomu" onerror="this.parentElement.classList.add('gallery-empty')">
+                <figcaption>Ganti caption 2</figcaption>
+            </figure>
+            <figure class="gallery-item">
+                <img src="assets/photo3.jpg" alt="Ganti dengan fotomu" onerror="this.parentElement.classList.add('gallery-empty')">
+                <figcaption>Ganti caption 3</figcaption>
+            </figure>
+            <figure class="gallery-item">
+                <img src="assets/photo4.jpg" alt="Ganti dengan fotomu" onerror="this.parentElement.classList.add('gallery-empty')">
+                <figcaption>Ganti caption 4</figcaption>
+            </figure>
+            <figure class="gallery-item">
+                <img src="assets/photo5.jpg" alt="Ganti dengan fotomu" onerror="this.parentElement.classList.add('gallery-empty')">
+                <figcaption>Ganti caption 5</figcaption>
+            </figure>
+            <figure class="gallery-item">
+                <img src="assets/photo6.jpg" alt="Ganti dengan fotomu" onerror="this.parentElement.classList.add('gallery-empty')">
+                <figcaption>Ganti caption 6</figcaption>
+            </figure>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- TIMELINE (draft, edit isinya)                  -->
+    <!-- ============================================= -->
+    <section class="section timeline-section" id="timeline">
+        <p class="section-eyebrow">Perjalanan Kita</p>
+        <h2 class="section-title small">Momen demi Momen</h2>
+
+        <div class="timeline">
+            <!-- GANTI semua tanggal & isi cerita di bawah dengan versi kalian berdua -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">Awal Bertemu</span>
+                    <p>Ganti dengan cerita pertama kali kalian bertemu atau kenal.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">Momen Berkesan</span>
+                    <p>Ganti dengan momen yang paling kamu ingat atau syukuri.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">Melewati Masa Sulit</span>
+                    <p>Ganti dengan momen kalian saling menguatkan.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">Hari Ini</span>
+                    <p>Ganti dengan perasaanmu sekarang, di hari ulang tahunnya.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- SURAT CINTA                                    -->
+    <!-- ============================================= -->
+    <section class="section letter-section" id="letter">
+        <p class="section-eyebrow">Sepucuk Surat</p>
+        <h2 class="section-title small">Untuk Afi</h2>
+
+        <div class="letter-card">
+            <!-- GANTI seluruh isi surat di bawah ini dengan kata-katamu sendiri -->
+            <p>Afi,</p>
+            <p>
+                Di hari ulang tahunmu ini, aku ingin kamu tahu betapa
+                bersyukurnya aku bisa mengenalmu dan menjalani hari-hari
+                bersamamu.
+            </p>
+            <p>
+                (Ganti paragraf ini dengan cerita atau perasaan spesifik —
+                boleh panjang, boleh personal, ini bagian paling penting
+                dari halaman ini.)
+            </p>
+            <p>
+                Selamat ulang tahun, sayang. Semoga tahun ini membawa
+                lebih banyak kebahagiaan untukmu.
+            </p>
+            <p class="letter-signature">— Ganti dengan namamu</p>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- MUSIK                                          -->
+    <!-- ============================================= -->
+    <section class="section music-section" id="music">
+        <p class="section-eyebrow">Lagu Untuknya</p>
+        <h2 class="section-title small">Putar Ini Saat Membaca</h2>
+
+        <div class="music-player">
+            <div class="music-icon" id="musicIcon">🎵</div>
+            <div class="music-info">
+                <p class="music-title" id="musicTitle">Nama Lagu</p>
+                <p class="music-artist" id="musicArtist">Nama Artis</p>
+            </div>
+            <button class="music-play-btn" id="musicPlayBtn" type="button" aria-label="Putar musik">▶</button>
+        </div>
+
+        <!--
+            CARA MENGISI MUSIK:
+            1. Taruh file lagu (mp3) di folder /assets, misal assets/song.mp3
+            2. Ganti src di bawah ini sesuai nama filenya
+            3. Ganti #musicTitle dan #musicArtist di atas lewat isi teks di HTML ini
+        -->
+        <audio id="audioPlayer" src="assets/song.mp3" preload="none"></audio>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- LINK KE HALAMAN PERJALANANKU                   -->
+    <!-- ============================================= -->
+    <section class="section reveal-section" id="reveal">
+        <p class="reveal-text">
+            Ada satu hal lagi yang ingin aku ceritakan padamu —
+            sesuatu yang belum pernah kamu tahu.
+        </p>
+        <a href="journey.html" class="reveal-button">Baca Ceritaku →</a>
+    </section>
 
 </main>
 
-
-<!-- CELEBRATION OVERLAY -->
+<!-- ============================================= -->
+<!-- CELEBRATION OVERLAY (tetap dari fitur tiup lilin) -->
+<!-- ============================================= -->
 <div class="celebration" id="celebration">
-
     <div class="confetti-container" id="confettiContainer"></div>
-
     <div class="celebration-content">
-
         <p class="celebration-emoji">🎂🎉</p>
-
-        <h2>Happy Birthday!</h2>
-
+        <h2>Happy Birthday, Afi!</h2>
         <p>Semoga semua harapanmu terkabul ✨</p>
-
-        <button
-            id="restartButton"
-            class="restart-button"
-            type="button"
-        >
-            Tiup Lagi
-        </button>
-
+        <button id="continueButton" class="restart-button" type="button">Lanjut ke Pesan Untukmu ↓</button>
+        <button id="restartButton" class="restart-button ghost" type="button">Tiup Lagi</button>
     </div>
-
 </div>
 
-
 <script src="script.js"></script>
-```
-
 </body>
 </html>
