@@ -54,12 +54,6 @@ html.stage-locked body {
   overscroll-behavior: none;
 }
 
-html.stage-locked .hero {
-  position: fixed;
-  inset: 0;
-  z-index: 5;
-}
-
 .skip-link {
   margin-top: 18px;
   background: none;
