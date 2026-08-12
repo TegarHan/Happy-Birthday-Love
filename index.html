@@ -39,6 +39,8 @@
 
         <button id="startButton" class="start-button" type="button">Mulai</button>
 
+        <button id="skipButton" class="skip-link" type="button">Lewati (kalau kamera bermasalah)</button>
+
     </section>
 
 
@@ -227,21 +229,24 @@
 
                 <!--
                     CARA MENGISI FOTO KENANGAN:
-                    Taruh foto di folder /assets dengan nama memory1.jpg s.d memory6.jpg.
+                    Taruh foto di folder /assets dengan nama 1.jpg s.d 6.jpg (format JPG/PNG, BUKAN HEIC/HEIF).
                     Foto ini akan muncul bergantian di belakang kotak musik saat musik diputar.
                 -->
                 <div class="music-box-photos" id="musicBoxPhotos">
-                    <img src="assets/memory1.jpg" alt="" onerror="this.remove()">
-                    <img src="assets/memory2.jpg" alt="" onerror="this.remove()">
-                    <img src="assets/memory3.jpg" alt="" onerror="this.remove()">
-                    <img src="assets/memory4.jpg" alt="" onerror="this.remove()">
-                    <img src="assets/memory5.jpg" alt="" onerror="this.remove()">
-                    <img src="assets/memory6.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/1.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/2.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/3.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/4.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/5.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/6.jpg" alt="" onerror="this.remove()">
                 </div>
 
                 <div class="music-box-overlay"></div>
 
                 <div class="music-box-core" id="musicBoxCore" role="button" aria-label="Putar musik box">
+                    <div class="music-box-body"></div>
+                    <div class="music-box-disc"></div>
+                    <div class="music-box-crank"></div>
                     <div class="music-box-lid" id="musicBoxLid"></div>
                     <div class="music-box-note" id="musicBoxNote">♪</div>
                 </div>
@@ -254,9 +259,9 @@
 
         <!--
             CARA MENGISI MUSIK:
-            Taruh file lagu (mp3) di folder /assets dengan nama musicbox-song.mp3
+            Taruh file lagu (mp3) di folder /assets dengan nama Lagu.mp3
         -->
-        <audio id="musicBoxAudio" src="assets/musicbox-song.mp3" preload="none" loop></audio>
+        <audio id="musicBoxAudio" src="assets/Lagu.mp3" preload="none" loop></audio>
     </section>
 
 
