@@ -11,6 +11,7 @@ const celebration = document.getElementById("celebration");
 const restartButton = document.getElementById("restartButton");
 const continueButton = document.getElementById("continueButton");
 const confettiContainer = document.getElementById("confettiContainer");
+const skipButton = document.getElementById("skipButton");
 
 let audioContext;
 let analyser;
@@ -23,6 +24,17 @@ const BLOW_THRESHOLD = 28;
 const BLOW_FRAMES_NEEDED = 6;
 
 /* =========================================
+KUNCI SCROLL SAMPAI LILIN DITIUP
+========================================= */
+
+// Kunci scroll begitu halaman dimuat — user hanya bisa lihat section hero
+document.documentElement.classList.add("stage-locked");
+
+function unlockScroll() {
+    document.documentElement.classList.remove("stage-locked");
+}
+
+/* =========================================
 CANDLE BLOW DETECTION (via mikrofon)
 ========================================= */
 
@@ -31,8 +43,16 @@ restartButton.addEventListener("click", resetExperience);
 
 continueButton.addEventListener("click", () => {
     celebration.classList.remove("show");
+    unlockScroll();
     document.getElementById("intro").scrollIntoView({ behavior: "smooth" });
 });
+
+if (skipButton) {
+    skipButton.addEventListener("click", () => {
+        unlockScroll();
+        document.getElementById("intro").scrollIntoView({ behavior: "smooth" });
+    });
+}
 
 async function initCamera() {
 
@@ -57,6 +77,11 @@ async function initCamera() {
 
         console.error(error);
         statusText.textContent = "Gagal: " + error.name + " — " + error.message;
+
+        // Kalau kamera/mikrofon gagal, tampilkan opsi lewati supaya user tidak terjebak
+        if (skipButton) {
+            skipButton.classList.add("visible");
+        }
 
     }
 
