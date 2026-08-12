@@ -855,7 +855,9 @@ CELEBRATION OVERLAY
   align-items: center;
   justify-content: center;
   background:
-      radial-gradient(circle at 50% 30%, rgba(232, 143, 179, 0.35), rgba(255, 245, 248, 0.98));
+      radial-gradient(circle at 50% 30%, rgba(255, 214, 230, 0.96), rgba(255, 245, 248, 0.98));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.6s ease;
@@ -872,9 +874,14 @@ CELEBRATION OVERLAY
   position: relative;
   z-index: 2;
   max-width: 320px;
-  padding: 24px;
+  width: calc(100% - 48px);
+  padding: 36px 28px;
   text-align: center;
   animation: popIn 0.6s ease;
+  background: var(--card-bg);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(232, 143, 179, 0.35);
+  border: 1px solid var(--card-border);
 }
 
 .celebration-emoji {
