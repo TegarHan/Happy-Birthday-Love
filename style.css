@@ -72,6 +72,12 @@ html.stage-locked body {
   pointer-events: auto;
 }
 
+/* Setelah lanjut dari tiup lilin, hero dihilangkan dari alur
+   supaya tidak bisa di-scroll balik ke atas lagi */
+.hero.retired {
+  display: none;
+}
+
 /* =========================================
 APP
 ========================================= */
