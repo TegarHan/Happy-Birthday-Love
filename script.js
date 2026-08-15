@@ -45,13 +45,31 @@ continueButton.addEventListener("click", () => {
     celebration.classList.remove("show");
     unlockScroll();
     document.getElementById("intro").scrollIntoView({ behavior: "smooth" });
+    retireHero();
 });
 
 if (skipButton) {
     skipButton.addEventListener("click", () => {
         unlockScroll();
         document.getElementById("intro").scrollIntoView({ behavior: "smooth" });
+        retireHero();
     });
+}
+
+// Setelah lanjut, hilangkan section tiup lilin dari alur halaman
+// supaya tidak bisa di-scroll balik ke atas lagi.
+function retireHero() {
+    const hero = document.getElementById("hero");
+    if (!hero) return;
+
+    setTimeout(() => {
+        hero.classList.add("retired");
+
+        // Matikan kamera & mikrofon karena sudah tidak dipakai lagi
+        if (micStream) {
+            micStream.getTracks().forEach((track) => track.stop());
+        }
+    }, 700); // beri jeda supaya animasi smooth-scroll selesai dulu
 }
 
 async function initCamera() {
