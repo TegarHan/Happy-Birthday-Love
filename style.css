@@ -176,34 +176,59 @@ CANDLE
 .candle-section {
   position: relative;
   width: 100%;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  height: 340px;
+  border-radius: 24px;
+  overflow: hidden;
 }
 
 .candle-glow {
   position: absolute;
-  width: 180px;
-  height: 180px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 140px;
   border-radius: 50%;
   background: var(--glow);
   filter: blur(40px);
+  z-index: 1;
 }
 
-.flame {
-  position: relative;
+/* Lilin angka "21" — ditaruh di bawah frame supaya wajah tetap terlihat jelas */
+.number-candles {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
   z-index: 2;
-  font-size: 65px;
-  margin-bottom: -12px;
+}
+
+.digit-candle {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.digit-flame.flame-piece {
+  font-size: 26px;
+  margin-bottom: -8px;
+  filter: drop-shadow(0 0 10px rgba(255, 170, 60, 0.7));
   animation: flicker 0.8s infinite alternate;
 }
 
-.candle {
-  position: relative;
-  z-index: 1;
-  font-size: 110px;
+.digit-body {
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 1;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #fff6e6 0%, #ffd08a 45%, #d98f4a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 3px 6px rgba(90, 50, 10, 0.35));
 }
 
 @keyframes flicker {
@@ -212,7 +237,7 @@ CANDLE
   100% { transform: scale(0.95) rotate(-1deg); }
 }
 
-.flame.extinguished {
+.digit-flame.flame-piece.extinguished {
   animation: none;
   opacity: 0;
   transform: scale(0.2) translateY(10px);
@@ -221,11 +246,13 @@ CANDLE
 
 .smoke {
   position: absolute;
-  top: 42%;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 18px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(to top, rgba(180, 170, 180, 0.5), transparent);
+  background: linear-gradient(to top, rgba(230, 220, 220, 0.6), transparent);
   filter: blur(6px);
   opacity: 0;
   z-index: 2;
@@ -237,9 +264,9 @@ CANDLE
 }
 
 @keyframes smokeRise {
-  0% { opacity: 0; transform: translateY(0) scale(1); }
+  0% { opacity: 0; transform: translateX(-50%) translateY(0) scale(1); }
   20% { opacity: 0.6; }
-  100% { opacity: 0; transform: translateY(-90px) scale(1.9); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-90px) scale(1.9); }
 }
 
 /* =========================================
