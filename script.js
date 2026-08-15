@@ -5,7 +5,7 @@ ELEMENTS
 const startButton = document.getElementById("startButton");
 const statusText = document.getElementById("status");
 const video = document.getElementById("webcam");
-const flame = document.getElementById("flame");
+const flames = document.querySelectorAll(".flame-piece");
 const candleSection = document.querySelector(".candle-section");
 const celebration = document.getElementById("celebration");
 const restartButton = document.getElementById("restartButton");
@@ -153,7 +153,7 @@ function blowOutCandle() {
     cancelAnimationFrame(rafId);
 
     statusText.textContent = "Lilin padam! 🎉";
-    flame.classList.add("extinguished");
+    flames.forEach((f) => f.classList.add("extinguished"));
     candleSection.classList.add("smoking");
 
     setTimeout(showCelebration, 1400);
@@ -228,7 +228,7 @@ function resetExperience() {
     blowFrameCount = 0;
 
     celebration.classList.remove("show");
-    flame.classList.remove("extinguished");
+    flames.forEach((f) => f.classList.remove("extinguished"));
     candleSection.classList.remove("smoking");
 
     statusText.textContent = "Arahkan wajah ke layar, lalu tiup lilinnya 🎂";
