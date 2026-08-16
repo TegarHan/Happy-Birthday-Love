@@ -85,11 +85,26 @@ async function initCamera() {
 
         const stream = await navigator.mediaDevices.getUserMedia({
             video: { facingMode: "user" },
-            audio: true
+            audio: {
+                // Matikan noise suppression/echo cancellation/auto-gain
+                // karena fitur ini didesain untuk panggilan suara dan
+                // malah meredam suara tiupan sehingga sulit terdeteksi.
+                echoCancellation: false,
+                noiseSuppression: false,
+                autoGainControl: false
+            }
         });
 
         micStream = stream;
         video.srcObject = stream;
+
+        // Beberapa browser (terutama mode Incognito / versi lama) butuh
+        // pemanggilan play() secara eksplisit, tidak cukup atribut autoplay saja.
+        try {
+            await video.play();
+        } catch (playError) {
+            console.error("video.play() gagal:", playError);
+        }
 
         statusText.textContent = "Arahkan wajah ke layar, lalu tiup lilinnya 🎂";
         startButton.style.display = "none";
@@ -113,6 +128,13 @@ async function initCamera() {
 function setupBlowDetection(stream) {
 
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Di beberapa mobile browser, AudioContext bisa dibuat dalam
+    // status "suspended" meski sudah ada user gesture — pastikan aktif.
+    if (audioContext.state === "suspended") {
+        audioContext.resume();
+    }
+
     const source = audioContext.createMediaStreamSource(stream);
 
     analyser = audioContext.createAnalyser();
