@@ -194,73 +194,27 @@ CANDLE
   z-index: 1;
 }
 
-/* Kue besar di bawah lilin */
+/* Kue besar di bawah lilin (SVG) */
 .birthday-cake {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 280px;
 }
 
-.cake-tier {
-  position: relative;
-  border-radius: 14px 14px 6px 6px;
-  box-shadow:
-      0 10px 24px rgba(232, 143, 179, 0.4),
-      inset 0 -10px 14px rgba(0, 0, 0, 0.08);
-}
-
-.cake-tier-top {
-  width: 170px;
-  height: 44px;
-  background: linear-gradient(180deg, #fff2f7, #ffc6dc);
-  margin-bottom: -6px;
-}
-
-.cake-tier-top::before {
-  content: "";
-  position: absolute;
-  top: -7px;
-  left: 0;
-  right: 0;
-  height: 12px;
-  background: repeating-radial-gradient(
-      circle at 12px 6px,
-      #ffffff 0 4px,
-      transparent 5px 24px
-  );
-  opacity: 0.95;
-}
-
-.cake-tier-bottom {
-  width: 260px;
-  height: 58px;
-  background: linear-gradient(180deg, #ffd6e8, #ef9dbf);
-}
-
-.cake-tier-bottom::before {
-  content: "";
-  position: absolute;
-  top: -7px;
-  left: 0;
-  right: 0;
-  height: 12px;
-  background: repeating-radial-gradient(
-      circle at 14px 6px,
-      #fff0f5 0 4px,
-      transparent 5px 26px
-  );
-  opacity: 0.95;
+.cake-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 10px 20px rgba(232, 143, 179, 0.35));
 }
 
 /* Lilin angka "21" — ditaruh di atas kue, di bawah frame supaya wajah tetap terlihat jelas */
 .number-candles {
   position: absolute;
-  bottom: 90px;
+  bottom: 92px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -277,9 +231,17 @@ CANDLE
 
 .digit-flame.flame-piece {
   font-size: 26px;
-  margin-bottom: -8px;
   filter: drop-shadow(0 0 10px rgba(255, 170, 60, 0.7));
   animation: flicker 0.8s infinite alternate;
+}
+
+/* Sumbu kecil penghubung api dan badan lilin, supaya api tidak terlihat melayang */
+.digit-wick {
+  width: 3px;
+  height: 12px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #4a3222, #241408);
+  border-radius: 1.5px;
 }
 
 .digit-body {
