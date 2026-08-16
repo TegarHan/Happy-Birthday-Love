@@ -29,18 +29,38 @@
             <video id="webcam" autoplay playsinline muted></video>
             <div class="candle-glow"></div>
 
+            <!-- Lilin kecil hias di sekitar lilin utama -->
+            <div class="deco-candles" id="decoCandles">
+                <span class="deco-flame flame-piece" style="left:16%; bottom:20px; animation-delay:0.1s; transition-delay:0.05s;">🔥</span>
+                <span class="deco-flame flame-piece" style="left:29%; bottom:8px; animation-delay:0.35s; transition-delay:0.15s;">🔥</span>
+                <span class="deco-flame flame-piece" style="right:29%; bottom:8px; animation-delay:0.2s; transition-delay:0.1s;">🔥</span>
+                <span class="deco-flame flame-piece" style="right:16%; bottom:20px; animation-delay:0.45s; transition-delay:0.2s;">🔥</span>
+            </div>
+
             <div class="number-candles" id="numberCandles">
                 <div class="digit-candle">
-                    <div class="digit-flame flame-piece">🔥</div>
+                    <div class="flame-shrink" id="flameShrink1">
+                        <div class="flame-wobble" id="flameWobble1">
+                            <div class="digit-flame flame-piece">🔥</div>
+                        </div>
+                    </div>
                     <div class="digit-body">2</div>
                 </div>
                 <div class="digit-candle">
-                    <div class="digit-flame flame-piece">🔥</div>
+                    <div class="flame-shrink" id="flameShrink2">
+                        <div class="flame-wobble" id="flameWobble2">
+                            <div class="digit-flame flame-piece">🔥</div>
+                        </div>
+                    </div>
                     <div class="digit-body">1</div>
                 </div>
             </div>
 
             <div class="smoke" id="smoke"></div>
+        </div>
+
+        <div class="blow-meter">
+            <div class="blow-meter-fill" id="blowMeterFill"></div>
         </div>
 
         <section class="instruction">
