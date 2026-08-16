@@ -239,11 +239,89 @@ CANDLE
   100% { transform: scale(0.95) rotate(-1deg); }
 }
 
+/* Tiupan pelan — api cuma bergoyang lembut, tidak mengurangi progress */
+@keyframes flickerSoft {
+  0% { transform: scale(1) rotate(-8deg) translateX(-3px); }
+  50% { transform: scale(1.05) rotate(8deg) translateX(3px); }
+  100% { transform: scale(0.97) rotate(-4deg) translateX(0); }
+}
+
+/* Tiupan kencang — api bergoyang liar, progress cepat naik */
+@keyframes flickerWild {
+  0% { transform: scale(1) rotate(-18deg) translateX(-5px); }
+  25% { transform: scale(0.82) rotate(14deg) translateX(5px); }
+  50% { transform: scale(1.15) rotate(-12deg) translateX(-4px); }
+  75% { transform: scale(0.8) rotate(16deg) translateX(4px); }
+  100% { transform: scale(1) rotate(-9deg) translateX(0); }
+}
+
+.candle-section.wavering-soft .flame-piece {
+  animation: flickerSoft 0.5s infinite;
+}
+
+.candle-section.wavering-strong .flame-piece {
+  animation: flickerWild 0.18s infinite;
+}
+
+/* Wrapper untuk goyangan api yang reaktif terhadap volume tiupan (real-time via JS) */
+.flame-wobble {
+  display: inline-block;
+  transform: rotate(0deg) translateX(0px);
+}
+
 .digit-flame.flame-piece.extinguished {
   animation: none;
   opacity: 0;
   transform: scale(0.2) translateY(10px);
   transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Wrapper terpisah supaya bisa dikecilkan bertahap via JS saat ditiup,
+   tanpa bentrok dengan animasi flicker di elemen dalamnya */
+.flame-shrink {
+  display: inline-block;
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Lilin kecil hias di sekitar lilin utama */
+.deco-candles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.deco-flame.flame-piece {
+  position: absolute;
+  font-size: 16px;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(255, 170, 60, 0.55));
+  animation: flicker 0.9s infinite alternate;
+}
+
+.deco-flame.flame-piece.extinguished {
+  animation: none;
+  opacity: 0;
+  transform: scale(0.2) translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Progress bar tiupan */
+.blow-meter {
+  width: 200px;
+  height: 6px;
+  margin: 14px auto 0;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.blow-meter-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--peach), var(--rose));
+  transition: width 0.08s linear;
 }
 
 .smoke {
