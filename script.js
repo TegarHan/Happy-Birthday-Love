@@ -390,6 +390,30 @@ startCountdown();
 
 
 /* =========================================
+BUKET TULIP — POP-UP SAAT SCROLL KE INTRO
+========================================= */
+
+const tulipBouquet = document.getElementById("tulipBouquet");
+
+if (tulipBouquet && "IntersectionObserver" in window) {
+
+    const tulipObserver = new IntersectionObserver((entries) => {
+
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                tulipBouquet.classList.add("popped");
+                tulipObserver.unobserve(entry.target); // cukup sekali saja
+            }
+        });
+
+    }, { threshold: 0.4 });
+
+    tulipObserver.observe(tulipBouquet);
+
+}
+
+
+/* =========================================
 KOTAK HADIAH -> KOTAK MUSIK
 ========================================= */
 
