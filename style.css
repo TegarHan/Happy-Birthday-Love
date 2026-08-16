@@ -176,28 +176,91 @@ CANDLE
 .candle-section {
   position: relative;
   width: 100%;
-  height: 340px;
+  height: 400px;
   border-radius: 24px;
   overflow: hidden;
 }
 
 .candle-glow {
   position: absolute;
-  bottom: 20px;
+  bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
-  height: 140px;
+  width: 220px;
+  height: 160px;
   border-radius: 50%;
   background: var(--glow);
   filter: blur(40px);
   z-index: 1;
 }
 
-/* Lilin angka "21" — ditaruh di bawah frame supaya wajah tetap terlihat jelas */
+/* Kue besar di bawah lilin */
+.birthday-cake {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cake-tier {
+  position: relative;
+  border-radius: 14px 14px 6px 6px;
+  box-shadow:
+      0 10px 24px rgba(232, 143, 179, 0.4),
+      inset 0 -10px 14px rgba(0, 0, 0, 0.08);
+}
+
+.cake-tier-top {
+  width: 170px;
+  height: 44px;
+  background: linear-gradient(180deg, #fff2f7, #ffc6dc);
+  margin-bottom: -6px;
+}
+
+.cake-tier-top::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: repeating-radial-gradient(
+      circle at 12px 6px,
+      #ffffff 0 4px,
+      transparent 5px 24px
+  );
+  opacity: 0.95;
+}
+
+.cake-tier-bottom {
+  width: 260px;
+  height: 58px;
+  background: linear-gradient(180deg, #ffd6e8, #ef9dbf);
+}
+
+.cake-tier-bottom::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: repeating-radial-gradient(
+      circle at 14px 6px,
+      #fff0f5 0 4px,
+      transparent 5px 26px
+  );
+  opacity: 0.95;
+}
+
+/* Lilin angka "21" — ditaruh di atas kue, di bawah frame supaya wajah tetap terlihat jelas */
 .number-candles {
   position: absolute;
-  bottom: 14px;
+  bottom: 90px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -326,7 +389,7 @@ CANDLE
 
 .smoke {
   position: absolute;
-  bottom: 60px;
+  bottom: 150px;
   left: 50%;
   transform: translateX(-50%);
   width: 18px;
@@ -409,6 +472,53 @@ INTRO SECTION
 
 .intro-section {
   padding-top: 32px;
+}
+
+/* =========================================
+BUKET TULIP — POP-UP SAAT SCROLL
+========================================= */
+
+.tulip-bouquet {
+  position: relative;
+  height: 90px;
+  margin: 0 auto 8px auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  opacity: 0;
+  transform: scale(0.3) translateY(50px) rotate(-12deg);
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tulip-bouquet.popped {
+  opacity: 1;
+  transform: scale(1) translateY(0) rotate(0deg);
+}
+
+.tulip {
+  font-size: 40px;
+  transform-origin: bottom center;
+  filter: drop-shadow(0 6px 10px rgba(232, 143, 179, 0.3));
+}
+
+/* Susunan kipas supaya terlihat seperti buket, bukan tulip berjejer */
+.tulip.t1 { transform: rotate(-28deg) translateY(10px); margin-right: -14px; }
+.tulip.t2 { transform: rotate(-12deg) translateY(0px); margin-right: -14px; }
+.tulip.t3 { transform: rotate(0deg) translateY(-8px); font-size: 46px; z-index: 2; }
+.tulip.t4 { transform: rotate(12deg) translateY(0px); margin-left: -14px; }
+.tulip.t5 { transform: rotate(28deg) translateY(10px); margin-left: -14px; }
+
+.bouquet-ribbon {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 46px;
+  height: 18px;
+  background: linear-gradient(135deg, var(--lavender), var(--rose));
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(185, 164, 224, 0.4);
 }
 
 .nickname {
