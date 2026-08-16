@@ -24,8 +24,8 @@ let candleBlownOut = false;
 let blowPower = 0;        // 0–100, terisi cepat kalau tiupan kencang
 let smoothedRms = 0;      // volume yang sudah dihaluskan biar tidak jitter
 
-const BLOW_THRESHOLD_SOFT = 18;   // di atas ini, api mulai bergoyang (tiupan pelan)
-const BLOW_THRESHOLD_STRONG = 42; // di atas ini, tiupan dianggap kencang -> progress cepat naik
+const BLOW_THRESHOLD_SOFT = 8;    // di atas ini, api mulai bergoyang (tiupan pelan)
+const BLOW_THRESHOLD_STRONG = 18; // di atas ini, tiupan dianggap kencang -> progress cepat naik
 const BLOW_DECAY_RATE = 1.4;      // kecepatan turun saat tidak ditiup sama sekali
 
 /* =========================================
@@ -86,12 +86,13 @@ async function initCamera() {
         const stream = await navigator.mediaDevices.getUserMedia({
             video: { facingMode: "user" },
             audio: {
-                // Matikan noise suppression/echo cancellation/auto-gain
-                // karena fitur ini didesain untuk panggilan suara dan
-                // malah meredam suara tiupan sehingga sulit terdeteksi.
+                // Noise suppression & echo cancellation didesain untuk suara
+                // bicara dan cenderung meredam suara tiupan/napas — matikan.
+                // Auto-gain TETAP dinyalakan supaya tiupan dari jarak normal
+                // (bukan nempel ke lubang mic) tetap cukup terdeteksi.
                 echoCancellation: false,
                 noiseSuppression: false,
-                autoGainControl: false
+                autoGainControl: true
             }
         });
 
