@@ -31,8 +31,38 @@
 
             <!-- Kue besar di bawah lilin -->
             <div class="birthday-cake" id="birthdayCake">
-                <div class="cake-tier cake-tier-top"></div>
-                <div class="cake-tier cake-tier-bottom"></div>
+                <svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" class="cake-svg">
+                    <defs>
+                        <linearGradient id="tierBottom" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#ffd6e8"/>
+                            <stop offset="100%" stop-color="#ef9dbf"/>
+                        </linearGradient>
+                        <linearGradient id="tierTop" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#fff2f7"/>
+                            <stop offset="100%" stop-color="#ffc6dc"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- bayangan alas -->
+                    <ellipse cx="150" cy="162" rx="130" ry="10" fill="rgba(150,90,120,0.18)"/>
+
+                    <!-- tingkat bawah -->
+                    <rect x="24" y="96" width="252" height="62" rx="12" fill="url(#tierBottom)"/>
+                    <path d="M24,96 Q40,78 56,96 Q72,78 88,96 Q104,78 120,96 Q136,78 152,96 Q168,78 184,96 Q200,78 216,96 Q232,78 248,96 Q264,78 276,96 L276,108 L24,108 Z" fill="#fff5f8" opacity="0.9"/>
+
+                    <!-- tingkat atas -->
+                    <rect x="82" y="40" width="136" height="58" rx="10" fill="url(#tierTop)"/>
+                    <path d="M82,40 Q95,24 108,40 Q121,24 134,40 Q147,24 160,40 Q173,24 186,40 Q199,24 212,40 L212,50 L82,50 Z" fill="#ffffff" opacity="0.95"/>
+
+                    <!-- taburan hiasan -->
+                    <circle cx="60" cy="128" r="3.5" fill="#d1668f"/>
+                    <circle cx="90" cy="140" r="3" fill="#b9a4e0"/>
+                    <circle cx="150" cy="132" r="3.5" fill="#ffcfa8"/>
+                    <circle cx="210" cy="140" r="3" fill="#d1668f"/>
+                    <circle cx="240" cy="128" r="3.5" fill="#b9a4e0"/>
+                    <circle cx="120" cy="72" r="2.5" fill="#d1668f"/>
+                    <circle cx="180" cy="72" r="2.5" fill="#ffcfa8"/>
+                </svg>
             </div>
 
             <!-- Lilin kecil hias di sekitar lilin utama -->
@@ -50,6 +80,7 @@
                             <div class="digit-flame flame-piece">🔥</div>
                         </div>
                     </div>
+                    <div class="digit-wick"></div>
                     <div class="digit-body">2</div>
                 </div>
                 <div class="digit-candle">
@@ -58,6 +89,7 @@
                             <div class="digit-flame flame-piece">🔥</div>
                         </div>
                     </div>
+                    <div class="digit-wick"></div>
                     <div class="digit-body">1</div>
                 </div>
             </div>
