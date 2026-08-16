@@ -181,7 +181,66 @@
         <p class="countdown-note" id="countdownNote"></p>
     </section>
 
+    
+    <!-- ============================================= -->
+    <!-- KOTAK HADIAH -> KOTAK MUSIK                    -->
+    <!-- ============================================= -->
+    <section class="section giftbox-section" id="giftbox">
+        <p class="section-eyebrow">Small gift for u</p>
+        <h2 class="section-title small">Hadiah buat kamu</h2>
+        <p class="section-desc">Aku cuma bisa ngasih ini hehe.</p>
 
+        <div class="giftbox-stage" id="giftboxStage">
+
+            <!-- STAGE 1: KOTAK HADIAH TERTUTUP -->
+            <div class="gift-box" id="giftBox">
+                <div class="gift-box-sparkles" id="giftSparkles"></div>
+                <div class="gift-box-emoji">🎁</div>
+                <p class="gift-box-hint">Ketuk untuk membuka</p>
+            </div>
+
+            <!-- STAGE 2: KOTAK MUSIK (muncul setelah kotak hadiah dibuka) -->
+            <div class="music-box" id="musicBox">
+
+                <!--
+                    CARA MENGISI FOTO KENANGAN:
+                    Taruh foto di folder /assets dengan nama 1.jpg s.d 6.jpg (format JPG/PNG, BUKAN HEIC/HEIF).
+                    Foto ini akan muncul bergantian di belakang kotak musik saat musik diputar.
+                -->
+                <div class="music-box-photos" id="musicBoxPhotos">
+                    <img src="assets/1.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/2.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/3.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/4.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/5.jpg" alt="" onerror="this.remove()">
+                    <img src="assets/6.jpg" alt="" onerror="this.remove()">
+                </div>
+
+                <div class="music-box-overlay"></div>
+
+                <div class="music-box-core" id="musicBoxCore" role="button" aria-label="Putar musik box">
+                    <div class="music-box-body"></div>
+                    <div class="music-box-disc"></div>
+                    <div class="music-box-crank"></div>
+                    <div class="music-box-lid" id="musicBoxLid"></div>
+                    <div class="music-box-note" id="musicBoxNote">♪</div>
+                </div>
+
+                <p class="music-box-hint" id="musicBoxHint">Tekan kotaknya untuk memutar musik</p>
+
+            </div>
+
+        </div>
+
+        <!--
+            CARA MENGISI MUSIK:
+            Taruh file lagu (mp3) di folder /assets dengan nama Lagu.mp3
+        -->
+        <audio id="musicBoxAudio" src="assets/Lagu.mp3" preload="none" loop></audio>
+    </section>
+
+</main>
+    
     <!-- ============================================= -->
     <!-- GALERI FOTO (placeholder, isi sendiri)         -->
     <!-- ============================================= -->
@@ -297,66 +356,6 @@
             <p class="letter-signature">— HanAFI ganteng</p>
         </div>
     </section>
-
-
-    <!-- ============================================= -->
-    <!-- KOTAK HADIAH -> KOTAK MUSIK                    -->
-    <!-- ============================================= -->
-    <section class="section giftbox-section" id="giftbox">
-        <p class="section-eyebrow">Small gift for u</p>
-        <h2 class="section-title small">Hadiah buat kamu</h2>
-        <p class="section-desc">Aku cuma bisa ngasih ini hehe.</p>
-
-        <div class="giftbox-stage" id="giftboxStage">
-
-            <!-- STAGE 1: KOTAK HADIAH TERTUTUP -->
-            <div class="gift-box" id="giftBox">
-                <div class="gift-box-sparkles" id="giftSparkles"></div>
-                <div class="gift-box-emoji">🎁</div>
-                <p class="gift-box-hint">Ketuk untuk membuka</p>
-            </div>
-
-            <!-- STAGE 2: KOTAK MUSIK (muncul setelah kotak hadiah dibuka) -->
-            <div class="music-box" id="musicBox">
-
-                <!--
-                    CARA MENGISI FOTO KENANGAN:
-                    Taruh foto di folder /assets dengan nama 1.jpg s.d 6.jpg (format JPG/PNG, BUKAN HEIC/HEIF).
-                    Foto ini akan muncul bergantian di belakang kotak musik saat musik diputar.
-                -->
-                <div class="music-box-photos" id="musicBoxPhotos">
-                    <img src="assets/1.jpg" alt="" onerror="this.remove()">
-                    <img src="assets/2.jpg" alt="" onerror="this.remove()">
-                    <img src="assets/3.jpg" alt="" onerror="this.remove()">
-                    <img src="assets/4.jpg" alt="" onerror="this.remove()">
-                    <img src="assets/5.jpg" alt="" onerror="this.remove()">
-                    <img src="assets/6.jpg" alt="" onerror="this.remove()">
-                </div>
-
-                <div class="music-box-overlay"></div>
-
-                <div class="music-box-core" id="musicBoxCore" role="button" aria-label="Putar musik box">
-                    <div class="music-box-body"></div>
-                    <div class="music-box-disc"></div>
-                    <div class="music-box-crank"></div>
-                    <div class="music-box-lid" id="musicBoxLid"></div>
-                    <div class="music-box-note" id="musicBoxNote">♪</div>
-                </div>
-
-                <p class="music-box-hint" id="musicBoxHint">Tekan kotaknya untuk memutar musik</p>
-
-            </div>
-
-        </div>
-
-        <!--
-            CARA MENGISI MUSIK:
-            Taruh file lagu (mp3) di folder /assets dengan nama Lagu.mp3
-        -->
-        <audio id="musicBoxAudio" src="assets/Lagu.mp3" preload="none" loop></audio>
-    </section>
-
-</main>
 
 <!-- ============================================= -->
 <!-- CELEBRATION OVERLAY (tetap dari fitur tiup lilin) -->
