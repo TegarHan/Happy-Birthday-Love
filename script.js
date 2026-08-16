@@ -378,7 +378,7 @@ function startCountdown() {
         cdMinutes.textContent = String(minutes).padStart(2, "0");
         cdSeconds.textContent = String(seconds).padStart(2, "0");
 
-        countdownNote.textContent = "Menghitung hari menuju harimu.";
+        countdownNote.textContent = "Menghitung hari menuju ulang tahun kamu.";
 
         requestAnimationFrame(() => setTimeout(tick, 1000));
 
