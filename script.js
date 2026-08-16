@@ -24,8 +24,8 @@ let candleBlownOut = false;
 let blowPower = 0;        // 0–100, terisi cepat kalau tiupan kencang
 let smoothedRms = 0;      // volume yang sudah dihaluskan biar tidak jitter
 
-const BLOW_THRESHOLD_SOFT = 8;    // di atas ini, api mulai bergoyang (tiupan pelan)
-const BLOW_THRESHOLD_STRONG = 18; // di atas ini, tiupan dianggap kencang -> progress cepat naik
+const BLOW_THRESHOLD_SOFT = 13;   // di atas ini, api mulai bergoyang (tiupan pelan)
+const BLOW_THRESHOLD_STRONG = 27; // di atas ini, tiupan dianggap kencang -> progress cepat naik
 const BLOW_DECAY_RATE = 1.4;      // kecepatan turun saat tidak ditiup sama sekali
 
 /* =========================================
@@ -159,7 +159,8 @@ function setupBlowDetection(stream) {
         const rms = Math.sqrt(sumSquares / dataArray.length);
 
         // Haluskan volume supaya reaksi tidak lompat-lompat karena noise
-        smoothedRms = smoothedRms * 0.75 + rms * 0.25;
+        // sesaat (batuk, ngomong keras sebentar, dsb)
+        smoothedRms = smoothedRms * 0.85 + rms * 0.15;
 
         const isSoftBlow = smoothedRms >= BLOW_THRESHOLD_SOFT && smoothedRms < BLOW_THRESHOLD_STRONG;
         const isStrongBlow = smoothedRms >= BLOW_THRESHOLD_STRONG;
