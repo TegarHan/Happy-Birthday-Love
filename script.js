@@ -6,6 +6,8 @@ const startButton = document.getElementById("startButton");
 const statusText = document.getElementById("status");
 const video = document.getElementById("webcam");
 const flames = document.querySelectorAll(".flame-piece");
+const flameShrinks = document.querySelectorAll(".flame-shrink");
+const blowMeterFill = document.getElementById("blowMeterFill");
 const candleSection = document.querySelector(".candle-section");
 const celebration = document.getElementById("celebration");
 const restartButton = document.getElementById("restartButton");
@@ -17,11 +19,14 @@ let audioContext;
 let analyser;
 let micStream;
 let rafId;
-let blowFrameCount = 0;
 let candleBlownOut = false;
 
-const BLOW_THRESHOLD = 28;
-const BLOW_FRAMES_NEEDED = 6;
+let blowPower = 0;        // 0–100, terisi cepat kalau tiupan kencang
+let smoothedRms = 0;      // volume yang sudah dihaluskan biar tidak jitter
+
+const BLOW_THRESHOLD_SOFT = 18;   // di atas ini, api mulai bergoyang (tiupan pelan)
+const BLOW_THRESHOLD_STRONG = 42; // di atas ini, tiupan dianggap kencang -> progress cepat naik
+const BLOW_DECAY_RATE = 1.4;      // kecepatan turun saat tidak ditiup sama sekali
 
 /* =========================================
 KUNCI SCROLL SAMPAI LILIN DITIUP
@@ -115,6 +120,7 @@ function setupBlowDetection(stream) {
     source.connect(analyser);
 
     const dataArray = new Uint8Array(analyser.fftSize);
+    let lastMessageBucket = -1;
 
     function checkVolume() {
 
@@ -129,14 +135,38 @@ function setupBlowDetection(stream) {
         }
         const rms = Math.sqrt(sumSquares / dataArray.length);
 
-        if (rms > BLOW_THRESHOLD) {
-            blowFrameCount++;
-            if (blowFrameCount >= BLOW_FRAMES_NEEDED) {
-                blowOutCandle();
-                return;
-            }
+        // Haluskan volume supaya reaksi tidak lompat-lompat karena noise
+        smoothedRms = smoothedRms * 0.75 + rms * 0.25;
+
+        const isSoftBlow = smoothedRms >= BLOW_THRESHOLD_SOFT && smoothedRms < BLOW_THRESHOLD_STRONG;
+        const isStrongBlow = smoothedRms >= BLOW_THRESHOLD_STRONG;
+
+        if (isStrongBlow) {
+            // Tiupan kencang: progress naik cepat, bisa langsung padam
+            const t = Math.min(1, (smoothedRms - BLOW_THRESHOLD_STRONG) / 35);
+            blowPower += 14 + t * 16; // ~14–30 per frame -> padam dalam hitungan sepersekian detik
+        } else if (isSoftBlow) {
+            // Tiupan pelan: api cuma bergoyang, progress tidak bertambah
+            blowPower += 0;
         } else {
-            blowFrameCount = Math.max(0, blowFrameCount - 1);
+            // Tidak ditiup sama sekali: perlahan kembali normal
+            blowPower -= BLOW_DECAY_RATE;
+        }
+
+        blowPower = Math.max(0, Math.min(100, blowPower));
+
+        updateBlowVisuals(blowPower, isSoftBlow, isStrongBlow);
+
+        // Pesan status berubah sesuai kondisi
+        const bucket = isStrongBlow ? 4 : (isSoftBlow ? 1 : 0);
+        if (bucket !== lastMessageBucket) {
+            lastMessageBucket = bucket;
+            statusText.textContent = getBlowMessage(bucket, blowPower);
+        }
+
+        if (blowPower >= 100) {
+            blowOutCandle();
+            return;
         }
 
         rafId = requestAnimationFrame(checkVolume);
@@ -144,6 +174,32 @@ function setupBlowDetection(stream) {
     }
 
     rafId = requestAnimationFrame(checkVolume);
+
+}
+
+function getBlowMessage(bucket, power) {
+    if (bucket === 4) return "Terus, sedikit lagi! 🔥";
+    if (bucket === 1) return "Apinya goyang! Tiup lebih kencang untuk memadamkannya";
+    return "Arahkan wajah ke layar, lalu tiup lilinnya 🎂";
+}
+
+function updateBlowVisuals(power, isSoftBlow, isStrongBlow) {
+
+    const ratio = power / 100;
+    const scale = 1 - ratio * 0.75;
+    const opacity = 1 - ratio * 0.85;
+
+    flameShrinks.forEach((wrap) => {
+        wrap.style.transform = `scale(${scale})`;
+        wrap.style.opacity = opacity;
+    });
+
+    if (blowMeterFill) {
+        blowMeterFill.style.width = power + "%";
+    }
+
+    candleSection.classList.toggle("wavering-soft", isSoftBlow);
+    candleSection.classList.toggle("wavering-strong", isStrongBlow);
 
 }
 
@@ -155,6 +211,7 @@ function blowOutCandle() {
     statusText.textContent = "Lilin padam! 🎉";
     flames.forEach((f) => f.classList.add("extinguished"));
     candleSection.classList.add("smoking");
+    candleSection.classList.remove("wavering-soft", "wavering-strong");
 
     setTimeout(showCelebration, 1400);
 
@@ -225,11 +282,14 @@ function playHappyBirthdayTune() {
 function resetExperience() {
 
     candleBlownOut = false;
-    blowFrameCount = 0;
+    blowPower = 0;
+    smoothedRms = 0;
 
     celebration.classList.remove("show");
     flames.forEach((f) => f.classList.remove("extinguished"));
     candleSection.classList.remove("smoking");
+    candleSection.classList.remove("wavering-soft", "wavering-strong");
+    updateBlowVisuals(0, false, false);
 
     statusText.textContent = "Arahkan wajah ke layar, lalu tiup lilinnya 🎂";
 
